@@ -1,0 +1,144 @@
+@model cSharp.Models.Inscription
+
+@{
+    ViewData["Title"] = "Détails de l'inscription";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index"><i class="bi bi-house-door"></i> Liste des inscriptions</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Détails</li>
+        </ol>
+    </nav>
+
+    <h1 class="display-5 fw-bold text-primary mb-4">
+        <i class="bi bi-info-circle-fill"></i> @ViewData["Title"]
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-badge-fill"></i> Inscription de @Model.Etudiant.Prenom @Model.Etudiant.Nom
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Information Étudiant -->
+                    <h5 class="text-primary mb-3"><i class="bi bi-person-circle"></i> Informations de l'étudiant</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-4 mb-3">
+                            <div class="detail-item">
+                                <div class="detail-label">
+                                    <i class="bi bi-person-badge text-primary"></i> Matricule
+                                </div>
+                                <div class="detail-value">
+                                    <span class="badge bg-secondary fs-6">@Model.Etudiant.Matricule</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="detail-item">
+                                <div class="detail-label">
+                                    <i class="bi bi-person-fill text-primary"></i> Nom
+                                </div>
+                                <div class="detail-value">@Model.Etudiant.Nom</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="detail-item">
+                                <div class="detail-label">
+                                    <i class="bi bi-person-fill text-primary"></i> Prénom
+                                </div>
+                                <div class="detail-value">@Model.Etudiant.Prenom</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Information Inscription -->
+                    <h5 class="text-success mb-3"><i class="bi bi-clipboard-check"></i> Détails de l'inscription</h5>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <div class="detail-label">
+                                    <i class="bi bi-mortarboard-fill text-primary"></i> Classe
+                                </div>
+                                <div class="detail-value">
+                                    <span class="badge bg-info text-dark fs-6">@Model.Classe.Libelle</span>
+                                    <br><small class="text-muted">Code: @Model.Classe.Code</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <div class="detail-label">
+                                    <i class="bi bi-calendar-event-fill text-primary"></i> Année Scolaire
+                                </div>
+                                <div class="detail-value">
+                                    <span class="badge @(Model.AnneeScolaire.Statut == cSharp.Models.Statut.ENCOURS ? "bg-success" : "bg-secondary") fs-6">
+                                        @Model.AnneeScolaire.Libelle
+                                    </span>
+                                    <br><small class="text-muted">@Model.AnneeScolaire.Statut</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <div class="detail-label">
+                                    <i class="bi bi-calendar-check-fill text-primary"></i> Date d'inscription
+                                </div>
+                                <div class="detail-value">@Model.Date.ToString("dd MMMM yyyy")</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="detail-item">
+                                <div class="detail-label">
+                                    <i class="bi bi-cash-coin text-primary"></i> Montant
+                                </div>
+                                <div class="detail-value text-success fw-bold fs-5">
+                                    @Model.Montant.ToString("N0") FCFA
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-light d-flex justify-content-between p-3">
+                    <a asp-action="Index" class="btn btn-secondary btn-lg">
+                        <i class="bi bi-arrow-left-circle"></i> Retour à la liste
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">
+                        <i class="bi bi-trash-fill"></i> Supprimer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .detail-item {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 10px;
+        border-left: 4px solid #667eea;
+        height: 100%;
+    }
+    .detail-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+    }
+    .detail-value {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #212529;
+    }
+</style>
