@@ -75,3 +75,11 @@ public class ApplicationDbContext : DbContext
     }
 }
 
+
+
+git init 
+git add .
+git commit -m "premier commit" 
+git branch -M main 
+git remote add origin https://github.com/Seynabou-Gueyee/examenCSharp_L3_GLRS_Semestre1_2026.git
+ git push -u origin main
